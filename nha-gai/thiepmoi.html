@@ -389,11 +389,12 @@
         });
     </script>
     <script>
-        document.addEventListener("touchstart", function () {
-            const v = document.querySelector("video");
-            v.removeAttribute("controls");
-            if (v && v.paused) v.play();
-        }, { once: true });
+        const v = document.querySelector("video");
+        // Xóa mọi thuộc tính controls Zalo tự thêm
+        v.removeAttribute("controls");
+
+        // Ép play lại nếu bị stop
+        setTimeout(() => v.play().catch(()=>{}), 100);
     </script>
     <script>
         window.onload = function () {
