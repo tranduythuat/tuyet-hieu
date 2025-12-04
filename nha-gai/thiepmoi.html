@@ -389,12 +389,18 @@
         });
     </script>
     <script>
-        document.querySelectorAll("video").forEach(video => {
-            video.removeAttribute("controls");
+        document.querySelectorAll("video").forEach(v => {
+            v.removeAttribute("controls");
 
-            // Ép play lại nếu autoplay bị chặn
+            v.muted = true;
+            v.setAttribute("playsinline", "");
+            v.setAttribute("webkit-playsinline", "");
+
+            // Thử play lại nếu autoplay bị chặn
             setTimeout(() => {
-                video.play().catch(() => {});
+                v.play().catch(err => {
+                    console.log("Autoplay bị chặn:", err);
+                });
             }, 100);
         });
     </script>
