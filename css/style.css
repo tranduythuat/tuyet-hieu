@@ -418,6 +418,7 @@ video {
 
 video::-webkit-media-controls {
   display: none !important;
+  overflow: hidden;
 }
 video {
   pointer-events: none; /* nếu muốn không cho click */
