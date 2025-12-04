@@ -216,7 +216,7 @@
             <div class="container-slide">
                 <div class="slider">
                     <div class="slide">
-                        <video autoplay muted loop controls>
+                        <video autoplay muted loop playsinline>
                             <source src="https://pub-d341ea7ec201435598469d75d8c4a056.r2.dev/tuyet-hieu/20251117_065525000_iOS%20(online-video-cutter.com).mp4" type="video/mp4">
                             Video không xem được.
                         </video>
@@ -341,7 +341,7 @@
             
 
             <div class="end">
-                <video autoplay muted loop controls class="video-overlay">
+                <video autoplay muted loop playsinline class="video-overlay">
                     <source src="https://pub-d341ea7ec201435598469d75d8c4a056.r2.dev/tuyet-hieu/20251117_065345000_iOS%20(online-video-cutter.com).mp4" type="video/mp4">
                     Video không xem được.
                 </video>
@@ -383,6 +383,12 @@
             mirror: false, // whether elements should animate out while scrolling past them
             anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
         });
+    </script>
+    <script>
+        document.addEventListener("touchstart", function () {
+            const v = document.querySelector("video");
+            if (v && v.paused) v.play();
+        }, { once: true });
     </script>
     <script>
         window.onload = function () {
