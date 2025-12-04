@@ -389,12 +389,14 @@
         });
     </script>
     <script>
-        const v = document.querySelector("video");
-        // Xóa mọi thuộc tính controls Zalo tự thêm
-        v.removeAttribute("controls");
+        document.querySelectorAll("video").forEach(video => {
+            video.removeAttribute("controls");
 
-        // Ép play lại nếu bị stop
-        setTimeout(() => v.play().catch(()=>{}), 100);
+            // Ép play lại nếu autoplay bị chặn
+            setTimeout(() => {
+                video.play().catch(() => {});
+            }, 100);
+        });
     </script>
     <script>
         window.onload = function () {
