@@ -206,7 +206,6 @@
                 </div>
             </div>
 
-
             <div class="logo">
                 <div class="box-flow">
                     <img src="../anh/flower01.png" alt="" class="">
@@ -216,10 +215,14 @@
             <div class="container-slide">
                 <div class="slider">
                     <div class="slide">
-                        <video autoplay muted playsinline loop id="video01">
-                            <source src="https://pub-d341ea7ec201435598469d75d8c4a056.r2.dev/tuyet-hieu/20251117_065525000_iOS%20(online-video-cutter.com).mp4" type="video/mp4">
-                            Video không xem được.
-                        </video>
+                        <div class="video-container">
+                            <video autoplay muted loop playsinline
+                            controls="0"
+                            controlslist="nodownload noplaybackrate nofullscreen" id="video01">
+                                <source src="https://pub-d341ea7ec201435598469d75d8c4a056.r2.dev/tuyet-hieu/20251117_065525000_iOS%20(online-video-cutter.com).mp4" type="video/mp4">
+                                Video không xem được.
+                            </video>
+                        </div>
                     </div>
                     <div class="slide">
                         <img src="https://pub-d341ea7ec201435598469d75d8c4a056.r2.dev/tuyet-hieu/18e7cefd0eaa81f4d8bb3.webp" alt="" style="object-position: 60% 50%;">
@@ -341,7 +344,9 @@
             
 
             <div class="end">
-                <video autoplay muted playsinline loop>
+                <video autoplay muted loop playsinline
+                controls="0"
+                controlslist="nodownload noplaybackrate nofullscreen" id="video02">
                     <source src="https://pub-d341ea7ec201435598469d75d8c4a056.r2.dev/tuyet-hieu/20251117_065345000_iOS%20(online-video-cutter.com).mp4" type="video/mp4">
                     Video không xem được.
                 </video>
@@ -385,32 +390,14 @@
         });
     </script>
     <script>
-        v1 = document.getElementById('video01');
-        v1.removeAttribute("controls");
-
-        // Đảm bảo video autoplay trên mobile
-        v1.muted = true;
-        v1.setAttribute("playsinline", "");
-        v1.setAttribute("webkit-playsinline", "");
-
-        // Thử autoplay khi trang load
-        setTimeout(() => {
-            v1.play().catch(() => {
-                alert("Autoplay bị chặn, chờ user tương tác...");
-            });
-        }, 1000);
-
-        // Khi user chạm/click -> play lại (nếu bị pause)
-        const tryPlay = () => {
-            if (v1.paused) {
-                v1.play().catch(err => {
-                    console.log("Không thể play sau tương tác:", err);
-                });
-            }
-        };
-
-        // Lắng nghe 1 lần là đủ
-        window.addEventListener("touchstart", tryPlay, { once: true });
+        document.addEventListener("touchstart", function () {
+            const v1 = document.getElementById('video01');
+            const v2 = document.getElementById('video02');
+            v1.removeAttribute("controls");
+            v2.removeAttribute("controls");
+            v1.play();
+            v2.play();
+        }, { once: true });
     </script>
     <script>
         window.onload = function () {
