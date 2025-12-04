@@ -415,7 +415,6 @@ video {
   height: auto; /* Tự giữ tỉ lệ */
   display: block;
 }
-
 video::-webkit-media-controls-enclosure,
 video::-webkit-media-controls {
   display: none !important;

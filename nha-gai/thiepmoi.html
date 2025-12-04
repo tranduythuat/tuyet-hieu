@@ -216,7 +216,7 @@
             <div class="container-slide">
                 <div class="slider">
                     <div class="slide">
-                        <video autoplay muted playsinline loop>
+                        <video autoplay muted playsinline loop id="video01">
                             <source src="https://pub-d341ea7ec201435598469d75d8c4a056.r2.dev/tuyet-hieu/20251117_065525000_iOS%20(online-video-cutter.com).mp4" type="video/mp4">
                             Video không xem được.
                         </video>
@@ -385,34 +385,32 @@
         });
     </script>
     <script>
-        document.querySelectorAll("video").forEach(v => {
-            v.removeAttribute("controls");
+        v1 = document.getElementById('video01');
+        v1.removeAttribute("controls");
 
-            // Đảm bảo video autoplay trên mobile
-            v.muted = true;
-            v.setAttribute("playsinline", "");
-            v.setAttribute("webkit-playsinline", "");
+        // Đảm bảo video autoplay trên mobile
+        v1.muted = true;
+        v1.setAttribute("playsinline", "");
+        v1.setAttribute("webkit-playsinline", "");
 
-            // Thử autoplay khi trang load
-            setTimeout(() => {
-                v.play().catch(() => {
-                    console.log("Autoplay bị chặn, chờ user tương tác...");
+        // Thử autoplay khi trang load
+        setTimeout(() => {
+            v1.play().catch(() => {
+                alert("Autoplay bị chặn, chờ user tương tác...");
+            });
+        }, 1000);
+
+        // Khi user chạm/click -> play lại (nếu bị pause)
+        const tryPlay = () => {
+            if (v1.paused) {
+                v1.play().catch(err => {
+                    console.log("Không thể play sau tương tác:", err);
                 });
-            }, 100);
+            }
+        };
 
-            // Khi user chạm/click -> play lại (nếu bị pause)
-            const tryPlay = () => {
-                if (v.paused) {
-                    v.play().catch(err => {
-                        console.log("Không thể play sau tương tác:", err);
-                    });
-                }
-            };
-
-            // Lắng nghe 1 lần là đủ
-            window.addEventListener("touchstart", tryPlay, { once: true });
-            window.addEventListener("click", tryPlay, { once: true });
-        });
+        // Lắng nghe 1 lần là đủ
+        window.addEventListener("touchstart", tryPlay, { once: true });
     </script>
     <script>
         window.onload = function () {
